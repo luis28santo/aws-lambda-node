@@ -1,0 +1,26 @@
+{
+	"name": "aws-lambda-node",
+	"version": "0.0.1",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "serverless offline",
+		"deploy": "serverless deploy --verbose"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/aws-lambda": "^8.10.136",
+		"esbuild": "^0.20.2",
+		"serverless": "^3.38.0",
+		"serverless-esbuild": "^1.52.1",
+		"serverless-offline": "^13.3.3",
+		"serverless-plugin-typescript": "^2.1.5",
+		"typescript": "^5.4.3"
+	},
+	"dependencies": {
+		"aws-sdk": "^2.1593.0",
+		"uuid": "^9.0.1"
+	}
+}

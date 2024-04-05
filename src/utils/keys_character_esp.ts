@@ -1,0 +1,18 @@
+export const KEYS_CHARACTER_ESP = {
+	birth_year: 'anio_nacimiento',
+	eye_color: 'color_ojos',
+	gender: 'genero',
+	hair_color: 'color_pelo',
+	height: 'altura',
+	homeworld: 'mundo_natal',
+	mass: 'masa',
+	name: 'nombre',
+	skin_color: 'color_piel',
+	films: 'peliculas',
+	species: 'especies',
+	vehicles: 'vehiculos',
+	starships: 'naves_estelares',
+	created: 'creado',
+	edited: 'editado',
+	url: 'url',
+};

@@ -1,0 +1,66 @@
+service: aws-lambda-node
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-2
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource:
+        - arn:aws:dynamodb:us-east-2:490289454599:table/charactersTable
+
+functions:
+  api:
+    handler: src/index.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+  createCharacter:
+    handler: src/routes/character/createCharacter.createCharacter
+    events:
+      - httpApi:
+          path: /character
+          method: post
+  getCharacters:
+    handler: src/routes/character/getCharacters.getCharacters
+    events:
+      - httpApi:
+          path: /character
+          method: get
+  getSWCharacters:
+    handler: src/routes/swapi/getSWCharacters.getSWCharacters
+    events:
+      - httpApi:
+          path: /sw/character
+          method: get
+
+custom:
+  esbuild:
+    bundle: true
+    minify: false
+    exclude: []
+
+plugins:
+  # - serverless-plugin-typescript
+  - serverless-esbuild
+  - serverless-offline
+
+resources:
+  Resources:
+    charactersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: charactersTable
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
