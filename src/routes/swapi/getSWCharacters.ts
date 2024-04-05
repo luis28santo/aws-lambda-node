@@ -4,7 +4,9 @@ import { SWService } from '../../services/swService';
 import { SWCharacterMapper } from '../../mappers/SWCharacterMapper';
 
 export const getSWCharacters: APIGatewayProxyHandler = async (event) => {
-	const characters = await SWService.getCharacters();
+	const name = event.queryStringParameters?.name;
+
+	const characters = await SWService.getCharacters(name);
 
 	const charactersEsp = SWCharacterMapper.changeKeysEnToKeysEsp(characters);
 

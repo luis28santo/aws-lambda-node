@@ -19,33 +19,65 @@ functions:
       - httpApi:
           path: /
           method: get
+          description: 'Api base'
+          responseData:
+            '200':
+              description: this went well
   createCharacter:
     handler: src/routes/character/createCharacter.createCharacter
     events:
       - httpApi:
           path: /character
           method: post
+          swaggerTags: ['characterDynamoDB']
+          bodyType: CharacterRequest
+          responseData:
+            '200':
+              description: Se creo correctamente el personaje en BD.
+              bodyType: CharacterResp
+            '400':
+              description: El body es nulo.
   getCharacters:
     handler: src/routes/character/getCharacters.getCharacters
     events:
       - httpApi:
           path: /character
           method: get
+          swaggerTags: ['characterDynamoDB']
+          responseData:
+            '200':
+              description: Se obtienen correctamente todos los personajes de BD.
+              bodyType: CharacterResp
   getSWCharacters:
     handler: src/routes/swapi/getSWCharacters.getSWCharacters
     events:
       - httpApi:
           path: /sw/character
           method: get
+          swaggerTags: ['swapi']
+          queryStringParameters:
+            name:
+              required: false
+              type: 'string'
+              description: Se puede probar con el nombre de 'Sky'
+          responseData:
+            '200':
+              description: Nos traemos todos los personajes de la api 'https://swapi.py4e.com/api/people/' o 'https://swapi.py4e.com/api/people/?search=XXXXXXXX'.
+              bodyType: CharacterFullEsp
 
 custom:
   esbuild:
     bundle: true
     minify: false
     exclude: []
+  autoswagger:
+    title: 'AWS-SERVERLESS-NODE'
+    apiType: 'httpApi'
+    description: Lambdas de aws para pasar la prueba
 
 plugins:
   # - serverless-plugin-typescript
+  - serverless-auto-swagger
   - serverless-esbuild
   - serverless-offline
 

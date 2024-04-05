@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"dev": "serverless offline",
+		"dev": "serverless offline start",
 		"deploy": "serverless deploy --verbose"
 	},
 	"keywords": [],
@@ -14,6 +14,7 @@
 		"@types/aws-lambda": "^8.10.136",
 		"esbuild": "^0.20.2",
 		"serverless": "^3.38.0",
+		"serverless-auto-swagger": "^2.12.0",
 		"serverless-esbuild": "^1.52.1",
 		"serverless-offline": "^13.3.3",
 		"serverless-plugin-typescript": "^2.1.5",

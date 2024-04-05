@@ -175,6 +175,18 @@
                         ]
                       },
                       {
+                        "Effect": "Deny",
+                        "Action": "logs:PutLogEvents",
+                        "Resource": [
+                          {
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-lambda-node-dev-swagger-ui:*"
+                          },
+                          {
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/aws-lambda-node-dev-swagger-json:*"
+                          }
+                        ]
+                      },
+                      {
                         "$ref": "$[\"service\"][\"provider\"][\"iamRoleStatements\"][0]"
                       }
                     ]
@@ -204,7 +216,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-lambda-node/dev/1712270807305-2024-04-04T22:46:47.305Z/aws-lambda-node.zip"
+                "S3Key": "serverless/aws-lambda-node/dev/1712285658947-2024-04-05T02:54:18.947Z/aws-lambda-node.zip"
               },
               "Handler": "src/index.handler",
               "Runtime": "nodejs18.x",
@@ -229,7 +241,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-lambda-node/dev/1712270807305-2024-04-04T22:46:47.305Z/aws-lambda-node.zip"
+                "S3Key": "serverless/aws-lambda-node/dev/1712285658947-2024-04-05T02:54:18.947Z/aws-lambda-node.zip"
               },
               "Handler": "src/routes/character/createCharacter.createCharacter",
               "Runtime": "nodejs18.x",
@@ -254,7 +266,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-lambda-node/dev/1712270807305-2024-04-04T22:46:47.305Z/aws-lambda-node.zip"
+                "S3Key": "serverless/aws-lambda-node/dev/1712285658947-2024-04-05T02:54:18.947Z/aws-lambda-node.zip"
               },
               "Handler": "src/routes/character/getCharacters.getCharacters",
               "Runtime": "nodejs18.x",
@@ -279,7 +291,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/aws-lambda-node/dev/1712270807305-2024-04-04T22:46:47.305Z/aws-lambda-node.zip"
+                "S3Key": "serverless/aws-lambda-node/dev/1712285658947-2024-04-05T02:54:18.947Z/aws-lambda-node.zip"
               },
               "Handler": "src/routes/swapi/getSWCharacters.getSWCharacters",
               "Runtime": "nodejs18.x",
@@ -297,44 +309,108 @@
               "GetSWCharactersLogGroup"
             ]
           },
-          "ApiLambdaVersionn91u7wmVmdO3joJwxUSrsegaffebRy5s0VD8tGxrQ": {
+          "SwaggerUILambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/aws-lambda-node/dev/1712285658947-2024-04-05T02:54:18.947Z/aws-lambda-node.zip"
+              },
+              "Handler": "swagger/swagger-html.handler",
+              "Runtime": "nodejs18.x",
+              "FunctionName": "aws-lambda-node-dev-swagger-ui",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            }
+          },
+          "SwaggerJSONLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/aws-lambda-node/dev/1712285658947-2024-04-05T02:54:18.947Z/aws-lambda-node.zip"
+              },
+              "Handler": "swagger/swagger-json.handler",
+              "Runtime": "nodejs18.x",
+              "FunctionName": "aws-lambda-node-dev-swagger-json",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            }
+          },
+          "ApiLambdaVersionmwmQJaOC7H60z4l8VWyq81ZhE0g3Ulhf4kt0VA9bqM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "iUkGvFs+y1+pdLgCilELmj1sMV1yoXtmmK0rLxyUc8o="
+              "CodeSha256": "NN7mSqi24XRPdQlnT8dQ39o4c4xKiFAggnt3uPwkClQ="
             }
           },
-          "CreateCharacterLambdaVersionv2LuCsumJ0XOCsJe1FLYGjl7RC3eMaX5uNHTvcEJqE": {
+          "CreateCharacterLambdaVersionO9FL4uq7gaicQY927uDXwUAoCjtiNFLlkVcpypaw": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateCharacterLambdaFunction"
               },
-              "CodeSha256": "iUkGvFs+y1+pdLgCilELmj1sMV1yoXtmmK0rLxyUc8o="
+              "CodeSha256": "NN7mSqi24XRPdQlnT8dQ39o4c4xKiFAggnt3uPwkClQ="
             }
           },
-          "GetCharactersLambdaVersionlNiuN37t5jH1LkIuWF5kss7wpT3cvY8hX88Puc8E": {
+          "GetCharactersLambdaVersionZ3jrlyEYS6I51knfR43DJUnmfwD77bQvfCn7weXE8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetCharactersLambdaFunction"
               },
-              "CodeSha256": "iUkGvFs+y1+pdLgCilELmj1sMV1yoXtmmK0rLxyUc8o="
+              "CodeSha256": "NN7mSqi24XRPdQlnT8dQ39o4c4xKiFAggnt3uPwkClQ="
             }
           },
-          "GetSWCharactersLambdaVersionwysIDXTNWeof4Pwynpc848mmwwI25dDsKQfvFXVHE": {
+          "GetSWCharactersLambdaVersion5QylxW1WLch2DwUGUSVO2LwWswQMywYQ9iyryAIsXU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetSWCharactersLambdaFunction"
               },
-              "CodeSha256": "iUkGvFs+y1+pdLgCilELmj1sMV1yoXtmmK0rLxyUc8o="
+              "CodeSha256": "NN7mSqi24XRPdQlnT8dQ39o4c4xKiFAggnt3uPwkClQ="
+            }
+          },
+          "SwaggerUILambdaVersionleeQ69aapzVx3vqJMIQv8tI3vrpQlQCKWeiBAl5QA": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "SwaggerUILambdaFunction"
+              },
+              "CodeSha256": "NN7mSqi24XRPdQlnT8dQ39o4c4xKiFAggnt3uPwkClQ="
+            }
+          },
+          "SwaggerJSONLambdaVersionENk0PX71KLzgHKrl3ZYU1RQqp0eC6ssiuMauyo3vTc": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "SwaggerJSONLambdaFunction"
+              },
+              "CodeSha256": "NN7mSqi24XRPdQlnT8dQ39o4c4xKiFAggnt3uPwkClQ="
             }
           },
           "HttpApi": {
@@ -645,6 +721,150 @@
             },
             "DependsOn": "HttpApiIntegrationGetSWCharacters"
           },
+          "SwaggerUILambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "SwaggerUILambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationSwaggerUI": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"SwaggerUILambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetSwagger": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /swagger",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationSwaggerUI"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationSwaggerUI"
+          },
+          "SwaggerJSONLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "SwaggerJSONLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationSwaggerJSON": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"SwaggerJSONLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetSwaggerjson": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /swagger.json",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationSwaggerJSON"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationSwaggerJSON"
+          },
           "charactersTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
@@ -680,7 +900,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionn91u7wmVmdO3joJwxUSrsegaffebRy5s0VD8tGxrQ"
+              "Ref": "ApiLambdaVersionmwmQJaOC7H60z4l8VWyq81ZhE0g3Ulhf4kt0VA9bqM"
             },
             "Export": {
               "Name": "sls-aws-lambda-node-dev-ApiLambdaFunctionQualifiedArn"
@@ -689,7 +909,7 @@
           "CreateCharacterLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateCharacterLambdaVersionv2LuCsumJ0XOCsJe1FLYGjl7RC3eMaX5uNHTvcEJqE"
+              "Ref": "CreateCharacterLambdaVersionO9FL4uq7gaicQY927uDXwUAoCjtiNFLlkVcpypaw"
             },
             "Export": {
               "Name": "sls-aws-lambda-node-dev-CreateCharacterLambdaFunctionQualifiedArn"
@@ -698,7 +918,7 @@
           "GetCharactersLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetCharactersLambdaVersionlNiuN37t5jH1LkIuWF5kss7wpT3cvY8hX88Puc8E"
+              "Ref": "GetCharactersLambdaVersionZ3jrlyEYS6I51knfR43DJUnmfwD77bQvfCn7weXE8"
             },
             "Export": {
               "Name": "sls-aws-lambda-node-dev-GetCharactersLambdaFunctionQualifiedArn"
@@ -707,10 +927,28 @@
           "GetSWCharactersLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetSWCharactersLambdaVersionwysIDXTNWeof4Pwynpc848mmwwI25dDsKQfvFXVHE"
+              "Ref": "GetSWCharactersLambdaVersion5QylxW1WLch2DwUGUSVO2LwWswQMywYQ9iyryAIsXU"
             },
             "Export": {
               "Name": "sls-aws-lambda-node-dev-GetSWCharactersLambdaFunctionQualifiedArn"
+            }
+          },
+          "SwaggerUILambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "SwaggerUILambdaVersionleeQ69aapzVx3vqJMIQv8tI3vrpQlQCKWeiBAl5QA"
+            },
+            "Export": {
+              "Name": "sls-aws-lambda-node-dev-SwaggerUILambdaFunctionQualifiedArn"
+            }
+          },
+          "SwaggerJSONLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "SwaggerJSONLambdaVersionENk0PX71KLzgHKrl3ZYU1RQqp0eC6ssiuMauyo3vTc"
+            },
+            "Export": {
+              "Name": "sls-aws-lambda-node-dev-SwaggerJSONLambdaFunctionQualifiedArn"
             }
           },
           "HttpApiId": {
@@ -838,9 +1076,15 @@
         "bundle": true,
         "minify": false,
         "exclude": []
+      },
+      "autoswagger": {
+        "title": "AWS-SERVERLESS-NODE",
+        "apiType": "httpApi",
+        "description": "Lambdas de aws para pasar la prueba"
       }
     },
     "plugins": [
+      "serverless-auto-swagger",
       "serverless-esbuild",
       "serverless-offline"
     ],
@@ -852,7 +1096,13 @@
           {
             "httpApi": {
               "path": "/",
-              "method": "get"
+              "method": "get",
+              "description": "Api base",
+              "responseData": {
+                "200": {
+                  "description": "this went well"
+                }
+              }
             },
             "resolvedMethod": "GET",
             "resolvedPath": "/"
@@ -864,7 +1114,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersionn91u7wmVmdO3joJwxUSrsegaffebRy5s0VD8tGxrQ"
+        "versionLogicalId": "ApiLambdaVersionmwmQJaOC7H60z4l8VWyq81ZhE0g3Ulhf4kt0VA9bqM"
       },
       "createCharacter": {
         "handler": "src/routes/character/createCharacter.createCharacter",
@@ -872,7 +1122,20 @@
           {
             "httpApi": {
               "path": "/character",
-              "method": "post"
+              "method": "post",
+              "swaggerTags": [
+                "characterDynamoDB"
+              ],
+              "bodyType": "CharacterRequest",
+              "responseData": {
+                "200": {
+                  "description": "Se creo correctamente el personaje en BD.",
+                  "bodyType": "CharacterResp"
+                },
+                "400": {
+                  "description": "El body es nulo."
+                }
+              }
             },
             "resolvedMethod": "POST",
             "resolvedPath": "/character"
@@ -884,7 +1147,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "CreateCharacterLambdaVersionv2LuCsumJ0XOCsJe1FLYGjl7RC3eMaX5uNHTvcEJqE"
+        "versionLogicalId": "CreateCharacterLambdaVersionO9FL4uq7gaicQY927uDXwUAoCjtiNFLlkVcpypaw"
       },
       "getCharacters": {
         "handler": "src/routes/character/getCharacters.getCharacters",
@@ -892,7 +1155,16 @@
           {
             "httpApi": {
               "path": "/character",
-              "method": "get"
+              "method": "get",
+              "swaggerTags": [
+                "characterDynamoDB"
+              ],
+              "responseData": {
+                "200": {
+                  "description": "Se obtienen correctamente todos los personajes de BD.",
+                  "bodyType": "CharacterResp"
+                }
+              }
             },
             "resolvedMethod": "GET",
             "resolvedPath": "/character"
@@ -904,7 +1176,7 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "GetCharactersLambdaVersionlNiuN37t5jH1LkIuWF5kss7wpT3cvY8hX88Puc8E"
+        "versionLogicalId": "GetCharactersLambdaVersionZ3jrlyEYS6I51knfR43DJUnmfwD77bQvfCn7weXE8"
       },
       "getSWCharacters": {
         "handler": "src/routes/swapi/getSWCharacters.getSWCharacters",
@@ -912,7 +1184,23 @@
           {
             "httpApi": {
               "path": "/sw/character",
-              "method": "get"
+              "method": "get",
+              "swaggerTags": [
+                "swapi"
+              ],
+              "queryStringParameters": {
+                "name": {
+                  "required": false,
+                  "type": "string",
+                  "description": "Se puede probar con el nombre de 'Sky'"
+                }
+              },
+              "responseData": {
+                "200": {
+                  "description": "Nos traemos todos los personajes de la api 'https://swapi.py4e.com/api/people/' o 'https://swapi.py4e.com/api/people/?search=XXXXXXXX'.",
+                  "bodyType": "CharacterFullEsp"
+                }
+              }
             },
             "resolvedMethod": "GET",
             "resolvedPath": "/sw/character"
@@ -924,7 +1212,49 @@
         "timeout": 6,
         "runtime": "nodejs18.x",
         "vpc": {},
-        "versionLogicalId": "GetSWCharactersLambdaVersionwysIDXTNWeof4Pwynpc848mmwwI25dDsKQfvFXVHE"
+        "versionLogicalId": "GetSWCharactersLambdaVersion5QylxW1WLch2DwUGUSVO2LwWswQMywYQ9iyryAIsXU"
+      },
+      "swaggerUI": {
+        "name": "aws-lambda-node-dev-swagger-ui",
+        "handler": "swagger/swagger-html.handler",
+        "disableLogs": true,
+        "events": [
+          {
+            "httpApi": {
+              "method": "get",
+              "path": "/swagger"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/swagger"
+          }
+        ],
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs18.x",
+        "vpc": {},
+        "versionLogicalId": "SwaggerUILambdaVersionleeQ69aapzVx3vqJMIQv8tI3vrpQlQCKWeiBAl5QA"
+      },
+      "swaggerJSON": {
+        "name": "aws-lambda-node-dev-swagger-json",
+        "handler": "swagger/swagger-json.handler",
+        "disableLogs": true,
+        "events": [
+          {
+            "httpApi": {
+              "method": "get",
+              "path": "/swagger.json"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/swagger.json"
+          }
+        ],
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs18.x",
+        "vpc": {},
+        "versionLogicalId": "SwaggerJSONLambdaVersionENk0PX71KLzgHKrl3ZYU1RQqp0eC6ssiuMauyo3vTc"
       }
     },
     "resources": {
@@ -963,7 +1293,18 @@
         "$ref": "$[\"service\"][\"provider\"]"
       },
       "functions": {
-        "$ref": "$[\"service\"][\"functions\"]"
+        "api": {
+          "$ref": "$[\"service\"][\"functions\"][\"api\"]"
+        },
+        "createCharacter": {
+          "$ref": "$[\"service\"][\"functions\"][\"createCharacter\"]"
+        },
+        "getCharacters": {
+          "$ref": "$[\"service\"][\"functions\"][\"getCharacters\"]"
+        },
+        "getSWCharacters": {
+          "$ref": "$[\"service\"][\"functions\"][\"getSWCharacters\"]"
+        }
       },
       "custom": {
         "$ref": "$[\"service\"][\"custom\"]"
@@ -979,7 +1320,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/aws-lambda-node/dev/1712270807305-2024-04-04T22:46:47.305Z",
+    "artifactDirectoryName": "serverless/aws-lambda-node/dev/1712285658947-2024-04-05T02:54:18.947Z",
     "artifact": "aws-lambda-node.zip"
   }
 }
